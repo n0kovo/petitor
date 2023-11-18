@@ -1,4 +1,4 @@
-# Petitor
+# Petitor (work in progress!)
 
 Petitor is a stripped-down fork of Patator by lanjelot, exclusively focused on HTTP fuzzing.
 Patator was written out of frustration from using Hydra, Medusa, Ncrack, Metasploit modules and Nmap NSE scripts for password guessing attacks.
