@@ -1694,9 +1694,6 @@ class TCP_Cache:
 
 # }}}
 
-
-# HTTP {{{
-
 if hasattr(pycurl, 'PRIMARY_PORT'):
   proxytype_mapping = {
     'http': pycurl.PROXYTYPE_HTTP,
@@ -1809,10 +1806,6 @@ class HTTP_fuzz(TCP_Cache):
 
   available_options = (
     ('url', 'target url (scheme://host[:port]/path?query)'),
-    #('host', 'target host'),
-    #('port', 'target port'),
-    #('path', 'web path [/]'),
-    #('query', 'query string'),
     ('body', 'body data'),
     ('header', 'use custom headers'),
     ('method', 'method to use [GET|POST|HEAD|...]'),
@@ -2064,13 +2057,14 @@ modules = [
 dependencies = {
   'pycurl': [('http_fuzz', 'rdp_gateway'), 'http://pycurl.io/', '7.43.0'],
   'libcurl': [('http_fuzz', 'rdp_gateway'), 'https://curl.haxx.se/', '7.58.0'],
-  'python': [('http_fuzz',), 'Petitor requires Python 3.6 or above and may still work on Python 2.'],
+  'python': [('http_fuzz',), 'Petitor requires Python 3.6 or above'],
   }
 
 # }}}
 
 # main {{{
 if __name__ == '__main__':
+  set_start_method('fork')
   multiprocessing.freeze_support()
 
   def show_usage():
