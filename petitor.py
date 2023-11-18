@@ -10,7 +10,6 @@ from operator import mul, itemgetter
 from select import select
 from itertools import islice, cycle
 import string
-import random
 from decimal import Decimal
 from base64 import b64encode
 from datetime import timedelta, datetime
@@ -37,11 +36,8 @@ from http.server import BaseHTTPRequestHandler
 from multiprocessing import set_start_method
 
 
-__author__  = 'Sebastien Macke'
-__email__   = 'petitor@hsc.fr'
-__url__     = 'http://www.hsc.fr/ressources/outils/petitor/'
-__git__     = 'https://github.com/lanjelot/petitor'
-__twitter__ = 'https://twitter.com/lanjelot'
+__author__  = 'n0kovo'
+__git__     = 'https://github.com/n0kovo/petitor'
 __version__ = '1.0'
 __license__ = 'GPLv2'
 __pyver__   = '%d.%d.%d' % sys.version_info[0:3]
@@ -2012,48 +2008,6 @@ class HTTP_fuzz(TCP_Cache):
 
 # }}}
 
-# Dummy Test {{{
-def generate_tst():
-  return ['prd', 'dev'], 2
-
-class Dummy_test:
-  '''Testing module'''
-
-  usage_hints = (
-    """%prog data=_@@_RANGE0_@@_ 0=hex:0x00-0xff -e _@@_:unhex""",
-    """%prog data=RANGE0 0=int:10-0""",
-    """%prog data=PROG0 0='seq -w 10 -1 0'""",
-    """%prog data=PROG0 0='mp64.bin -i ?l?l?l',$(mp64.bin --combination -i ?l?l?l)""",
-    )
-
-  available_options = (
-    ('data', 'data to test'),
-    ('data2', 'data2 to test'),
-    ('delay', 'fake random delay'),
-    )
-  available_actions = ()
-
-  available_keys = {
-    'TST': generate_tst,
-    }
-
-  Response = Response_Base
-
-  def execute(self, data, data2='', delay='1'):
-    code, mesg = 0, '%s / %s' % (data, data2)
-    with Timing() as timing:
-      sleep(random.randint(0, int(delay)*1000)/1000.0)
-
-    return self.Response(code, mesg, timing)
-
-# }}}
-
-# modules {{{
-modules = [
-  ('http_fuzz', (Controller_HTTP, HTTP_fuzz)),
-  ('dummy_test', (Controller, Dummy_test)),
-  ]
-
 dependencies = {
   'pycurl': [('http_fuzz', 'rdp_gateway'), 'http://pycurl.io/', '7.43.0'],
   'libcurl': [('http_fuzz', 'rdp_gateway'), 'https://curl.haxx.se/', '7.58.0'],
@@ -2069,28 +2023,8 @@ if __name__ == '__main__':
 
   def show_usage():
     print(__banner__)
-    print('''Usage: petitor.py module --help
-
-Available modules:
-%s''' % '\n'.join('  + %-13s : %s' % (k, v[1].__doc__) for k, v in modules))
-
-    sys.exit(2)
-
-  available = dict(modules)
-  name = os.path.basename(sys.argv[0]).lower()
-
-  if name not in available:
-    if len(sys.argv) == 1:
-      show_usage()
-
-    name = os.path.basename(sys.argv[1]).lower()
-    if name not in available:
-      show_usage()
-
-    del sys.argv[0]
 
   # start
-  ctrl, module = available[name]
-  powder = ctrl(module, [name] + sys.argv[1:])
+  powder = Controller_HTTP(HTTP_fuzz, ["http_fuzz"] + sys.argv[1:])
   powder.fire()
 
