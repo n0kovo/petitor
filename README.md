@@ -3,6 +3,12 @@
 Petitor is a stripped-down fork of Patator by lanjelot, exclusively focused on HTTP fuzzing.
 Patator was written out of frustration from using Hydra, Medusa, Ncrack, Metasploit modules and Nmap NSE scripts for password guessing attacks.
 
+# Differences from Patator
+
+- Module functionality dropped. http_fuzz only.
+- Windows support dropped.
+- Compatible with recent Python versions.
+
 ## Install
 
 ```
