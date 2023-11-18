@@ -2,7 +2,7 @@ version: "3"
 services:
   unix:
     build: testing/unix
-    image: patator-unix-testing
+    image: petitor-unix-testing
 #   ports:
 #      - "21:21"
 #      - "22:22"
@@ -28,32 +28,13 @@ services:
 #      - "8080:8080"
 #      - "161:161/udp"
     volumes:
-      - .:/opt/patator
+      - .:/opt/petitor
 
-  oracle:
-    image: oracleinanutshell/oracle-xe-11g
-    environment:
-       - ORACLE_ENABLE_XDB=true
-    ports:
-      - "1521:1521"
-
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Password1
-    ports:
-      - "1433:1433"
-
-  patator:
+  petitor:
     build: .
-    image: patator
-    depends_on:
-      - unix
-      - oracle
-      - mssql
+    image: petitor
     environment:
       - DISPLAY
     volumes:
-      - .:/opt/patator
+      - .:/opt/petitor
       - /tmp/.X11-unix:/tmp/.X11-unix
