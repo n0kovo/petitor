@@ -7,6 +7,7 @@ Patator was written out of frustration from using Hydra, Medusa, Ncrack, Metaspl
 
 - Module functionality dropped. http_fuzz only.
 - Windows support dropped. Might still work. Not tested.
+- Python2 support dropped.
 - Compatible with recent Python versions.
 
 ## To-do
