@@ -1,14 +1,2 @@
-paramiko
 pycurl
-ajpy
-impacket
-pyopenssl
-cx_Oracle
-mysqlclient
-psycopg2-binary
-pycryptodomex
-dnspython
 IPy
-pysnmp==4.4.12
-pyasn1==0.4.8
-pysqlcipher3
