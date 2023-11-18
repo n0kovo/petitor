@@ -9,6 +9,12 @@ Patator was written out of frustration from using Hydra, Medusa, Ncrack, Metaspl
 - Windows support dropped. Might still work. Not tested.
 - Compatible with recent Python versions.
 
+# To-do
+
+- Break down huge monolithic codebase in `petitor.py` into logically organized modules.
+- Refactor for readability and PEP-8 compliance.
+- Lots of testing.
+
 ## Install
 
 ```
